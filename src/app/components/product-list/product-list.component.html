@@ -1,0 +1,31 @@
+<table>
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Expiry</th>
+            <th>Product Category</th>
+            <th>Price</th>
+            <th>Special?</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+        <td colspan="6">
+        <div class="links"> Add a new product:  <button (click)="addNewProduct()"><img class="icon" src="assets/img/plus-square.svg"></button></div>
+        </td>
+        </tr>
+    </tfoot>
+    <tr *ngFor="let product of products" [ngClass]="{'special-item': product.special === true}">
+        <td> {{product.description}}</td>
+        <td> {{product.expiry | date: 'dd/MM/yyyy'}} </td>
+        <td> {{Category[product.category]}} </td>
+        <td> £{{product.price | number:'1.2-2' }} </td>
+        <td> {{getSpecial(product.special)}} </td>
+        <td> <span>
+            <button (click)="editProduct(product)"><img class="icon" src="assets/img/pencil.svg"></button>
+            <button (click)="deleteProduct(product)"><img class="icon" src="assets/img/x.svg"></button>
+        </span> </td>
+    </tr>
+
+</table>

@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>Product Editor</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <label>Product Description</label>
+    <input matInput [(ngModel)]="data.description">
+  </mat-form-field>
+
+  
+  <mat-checkbox style="width: 100%;" [(ngModel)]="data.canExpire">Is Product Perishable?</mat-checkbox>
+
+  <mat-form-field *ngIf="data.canExpire">
+    <input matInput [matDatepicker]="expiryPicker" [(ngModel)]="data.expiry">
+    <mat-datepicker-toggle matSuffix [for]="expiryPicker"></mat-datepicker-toggle>
+    <mat-datepicker #expiryPicker></mat-datepicker>
+  </mat-form-field> 
+
+  <label for="category">Product Category</label>
+  <mat-chip-listbox #category [(ngModel)]="data.category">
+    <mat-chip-option [value]="0">Vegetable</mat-chip-option>
+    <mat-chip-option [value]="1">Meat</mat-chip-option>
+    <mat-chip-option [value]="2">Dairy</mat-chip-option>
+    <mat-chip-option [value]="3">Furnature</mat-chip-option>
+    <mat-chip-option [value]="4">Utensils</mat-chip-option>
+    <mat-chip-option [value]="5">DIY</mat-chip-option>
+  </mat-chip-listbox>
+
+  <mat-form-field>
+    <label>Product Price (£)</label>
+    <input matInput type="number" placeholder="00.00" [(ngModel)]="data.price">
+  </mat-form-field>
+
+  <mat-checkbox [(ngModel)]="data.special">Is Product Special?</mat-checkbox>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+</div>
